@@ -1,0 +1,48 @@
+.header {
+  background-color: var(--dark-shades);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0.2rem 0;
+}
+
+.brand {
+  flex: 1;
+}
+
+.brandLink {
+  display: inline-flex;
+  gap: 1rem;
+  text-decoration: none;
+  align-items: center;
+}
+
+.logo {
+  width: 55px;
+  height: 55px;
+}
+
+.title {
+  color: var(--light-shades);
+  font-size: var(--h2-font-size);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navItem {
+  font-size: var(--paragraph-font-size);
+  color: var(--light-shades);
+  text-decoration: none;
+}
+
+.navItem:hover {
+  border-bottom: 2px solid var(--light-shades);
+}

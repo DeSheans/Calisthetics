@@ -1,0 +1,15 @@
+.option {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+
+.optionInput {
+  accent-color: var(--main-brand-color);
+  border-radius: 2px;
+  width: 0.8rem;
+}
+
+.optionSpan::first-letter {
+  text-transform: capitalize;
+}

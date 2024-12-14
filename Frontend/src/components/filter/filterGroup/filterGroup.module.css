@@ -1,0 +1,39 @@
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.heading {
+  font-weight: 600;
+}
+.heading::first-letter {
+  text-transform: capitalize;
+}
+
+.optionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-right: 1rem;
+
+  /* max-height: 7rem;
+  
+    overflow-y: hidden;
+    overflow-x: auto; */
+}
+
+/* .groupHider {
+  } */
+
+.hiderButton {
+  color: var(--main-brand-color);
+  font-size: var(--paragraph-font-size);
+  background: transparent;
+  border: none;
+}
+
+.hiderButton:hover {
+  color: var(--main-brand-color-hover);
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--light-shades);
+}
+
+.main {
+  flex-grow: 1;
+
+  padding-bottom: 2rem;
+  min-width: var(--page-width);
+  max-width: var(--page-width);
+  margin: 0 auto;
+
+  color: var(--dark-shades);
+  background-color: var(--light-shades);
+}
+
+.footer {
+  min-width: var(--page-width);
+}
+
+.header {
+  min-width: var(--page-width);
+}

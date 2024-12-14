@@ -1,28 +1,38 @@
 services:
-  # frontend:
-  #   container_name: nextjs
-  #   build:
-  #     context: Frontend
-  #     dockerfile: next.dockerfile
-  #   restart: always
-  #   ports: 3000:3000
-  #   networks:
-  #     - next-go
-  #   depends_on: backend
+  frontend:
+    container_name: nextjs
+    build:
+      context: Frontend
+      dockerfile: next.dockerfile
+    restart: on-failure
+    environment:
+      - NEXT_PUBLIC_API_URL=localhost:8080
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    # networks:
+    #   - next-pub
+    depends_on:
+      - backend
 
   backend:
     container_name: go
     build:
       context: Backend
       dockerfile: go.dockerfile
-    # restart: always
+    restart: on-failure
     environment:
       - DB_HOST=mongodb://mongo
-      - DB_PORT=:27017
+      - DB_PORT=27017
+      - WEB_HOST=localhost
+      - WEB_PORT=8080
+    ports:
+      - 8080:8080
     expose:
       - 8080
     networks:
-      - next-go
+      # - go-pub
       - go-mongo
     depends_on:
       - mongo
@@ -30,22 +40,20 @@ services:
   mongo:
     container_name: mongo
     image: mongo:8.0.3
-    restart: always
-    # environment:
-    #   - MONGO_USER=mongo
-    #   - MONGO_PASSWORD=mongo
+    restart: on-failure
     expose:
       - 27017
     networks:
       - go-mongo
     volumes:
       - mongo_data:/data/db
-      - mongodb_config:/data/configdb
 
 networks:
-  next-go:
+  # next-pub:
+  #   external: true
+  # go-pub:
+  #   external: true
   go-mongo:
 
 volumes:
   mongo_data:
-  mongodb_config:

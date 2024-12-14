@@ -2,18 +2,14 @@ package config
 
 import (
 	"gin-web-server/database/mongo"
+	"gin-web-server/server/gin"
 	"os"
 )
 
 // Config struct represents app configuration data
 type Config struct {
 	Database  mongo.Config
-	WebServer WebServer
-}
-
-// WebServer struct represents configuration settings that are used to work with web-server
-type WebServer struct {
-	Port string
+	WebServer gin.Config
 }
 
 // CreateConfig : creates configuration struct that contains database connection information, server settings etc.
@@ -25,8 +21,9 @@ func CreateConfig() Config {
 		Password: "",
 	}
 
-	wsCfg := WebServer{
-		Port: ":8080",
+	wsCfg := gin.Config{
+		Port: os.Getenv("WEB_PORT"),
+		Host: os.Getenv("WEB_HOST"),
 	}
 
 	return Config{

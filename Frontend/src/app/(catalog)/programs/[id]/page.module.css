@@ -1,0 +1,70 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.heading {
+  margin-top: 0.4rem;
+}
+
+/* .description {
+} */
+
+.brief {
+  border-radius: 1rem;
+  box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.4);
+
+  width: fit-content;
+
+  /* margin: 0 auto; */
+}
+
+.briefInner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  padding: 2rem 1rem;
+}
+
+.trainingsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Training table */
+
+.trainingCaption {
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.trainingTable {
+  border: 1px solid var(--dark-shades);
+  border-collapse: collapse;
+}
+
+/* .trainingRow {
+} */
+
+thead > .trainingRow {
+  background-color: var(--light-shades-dark);
+}
+
+tbody > .trainingRow:nth-child(even) {
+  background-color: var(--light-shades);
+}
+tbody > .trainingRow:nth-child(odd) {
+  background-color: var(--light-shades-dim);
+}
+
+.trainingData {
+  text-align: center;
+  padding: 0.2rem 0;
+}

@@ -1,0 +1,32 @@
+.footer {
+  background-color: var(--dark-shades);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.columnTitle {
+  color: var(--light-shades);
+}
+
+.columnItem {
+  color: var(--light-accent);
+  text-decoration: none;
+}
+
+.columnItem:hover {
+  color: var(--light-shades);
+}

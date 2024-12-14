@@ -1,0 +1,50 @@
+.inner {
+  border: 2px solid var(--dark-shades);
+  border-radius: 10px;
+
+  padding: 1rem 0 1rem 1rem;
+
+  position: relative;
+}
+
+.heading {
+  font-size: var(--h2-font-size);
+  font-weight: bold;
+  padding-bottom: 0.3rem;
+}
+
+.link {
+  color: var(--dark-shades);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.class {
+}
+
+.type {
+}
+
+.trainingNumber {
+}
+
+.difficulty {
+}
+
+.trainings {
+  padding-left: 1rem;
+}
+
+/* .favorite {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 1rem;
+  right: 1rem;
+} */
+
+.training {
+}

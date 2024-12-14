@@ -1,0 +1,18 @@
+.filter {
+  background-color: var(--light-shades);
+  border-radius: 25px;
+  box-shadow: 4px 4px 6px 6px rgba(0, 0, 0, 0.4);
+  color: var(--dark-shades);
+}
+
+.inner {
+  padding: 1rem;
+  padding-right: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* .heading {
+} */
