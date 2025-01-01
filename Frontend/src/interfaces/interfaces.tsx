@@ -28,15 +28,22 @@ export interface ProgramType {
   name: string;
 }
 
+export interface StaticFilterGroup {
+  groupID: string;
+  name: string;
+  options: FilterOption[];
+  groupType: string;
+}
+
 export interface FilterGroup {
   groupID: string;
   name: string;
   options: FilterOption[];
+  groupType: string;
   changeSelectedOptions(
     selectedOptionsID: number[],
     changedOptionID: number
   ): void;
-  returnType(): string;
 }
 
 export interface FilterOption {
@@ -48,14 +55,18 @@ export class CheckboxGroup implements FilterGroup {
   groupID: string;
   name: string;
   options: FilterOption[];
+  groupType: string;
 
-  constructor(groupID: string, name: string, options: FilterOption[]) {
+  constructor(
+    groupID: string,
+    name: string,
+    options: FilterOption[],
+    groupType: string
+  ) {
     this.groupID = groupID;
     this.name = name;
     this.options = options;
-  }
-  returnType(): string {
-    return "checkbox";
+    this.groupType = groupType;
   }
 
   changeSelectedOptions(selectedOptionsID: number[], changedOptionID: number) {
@@ -72,14 +83,18 @@ export class RadioGroup implements FilterGroup {
   groupID: string;
   name: string;
   options: FilterOption[];
+  groupType: string;
 
-  constructor(groupID: string, name: string, options: FilterOption[]) {
+  constructor(
+    groupID: string,
+    name: string,
+    options: FilterOption[],
+    groupType: string
+  ) {
     this.groupID = groupID;
     this.name = name;
     this.options = options;
-  }
-  returnType(): string {
-    return "radio";
+    this.groupType = groupType;
   }
 
   changeSelectedOptions(selectedOptionsID: number[], changedOptionID: number) {
@@ -91,10 +106,10 @@ export class RadioGroup implements FilterGroup {
 export interface Exercise {
   id: number;
   name: string;
-  muscles: Muscle[];
-  difficulty: Difficulty;
-  exerciseType: ExerciseType;
-  equipment: Equipment[];
+  muscles: string[];
+  difficulty: string;
+  exerciseType: string;
+  equipment: string[];
   description: string;
   tips: string[];
   variations: string[];
@@ -113,7 +128,7 @@ export interface ExerciseCard {
 export interface Program {
   id: number;
   name: string;
-  type: string;
+  programType: string;
   difficulty: string;
   description: string;
   trainings: Training[];
@@ -122,7 +137,7 @@ export interface Program {
 export interface ProgramCard {
   id: number;
   name: string;
-  type: string;
+  programType: string;
   difficulty: string;
   trainings: Training[];
 }
@@ -130,6 +145,11 @@ export interface ProgramCard {
 export interface Training {
   id: number;
   name: string;
-  trainingType: TrainingType;
-  exercises: { exercise: Exercise; sets: string; reps: string; rest: string }[];
+  trainingType: string;
+  exercises: {
+    exercise: string;
+    sets: string;
+    reps: string;
+    rest: string;
+  }[];
 }

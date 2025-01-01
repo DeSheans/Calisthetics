@@ -1,6 +1,5 @@
 import type { ExerciseCard } from "@/interfaces/interfaces";
 import styles from "./exerciseCard.module.css";
-import Favorite from "@/components/favorite/favoriteSvg/favorite";
 import Link from "next/link.js";
 
 export default function ExerciseCard({ exercise }: { exercise: ExerciseCard }) {
@@ -11,8 +10,10 @@ export default function ExerciseCard({ exercise }: { exercise: ExerciseCard }) {
       <Link className={styles.link} href={exerciseUrl}>
         <img
           className={styles.picture}
-          src={exercise.picture}
+          src={`/pictures/${exercise.picture}`}
           alt={exercise.name}
+          loading="lazy"
+          decoding="async"
         />
       </Link>
 
@@ -32,7 +33,6 @@ export default function ExerciseCard({ exercise }: { exercise: ExerciseCard }) {
           </ul>
         </div>
       </div>
-      {/* <div className={styles["favorite-container"]}>{Favorite()}</div> */}
     </div>
   );
 }

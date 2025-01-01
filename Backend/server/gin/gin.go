@@ -5,6 +5,7 @@ import (
 	"gin-web-server/app/handlers"
 	"gin-web-server/server"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,12 +22,28 @@ func NewGinServer(cfg Config, handler handlers.Handler) server.Server {
 func (g ginServer) Run() error {
 	router := gin.Default()
 
-	router.GET("/exercises", g.getAllExerciseCards)
+	corsConfiguration(router)
 
-	// localhost:8080
-	if err := router.Run(fmt.Sprintf("%s:%s", g.cfg.Host, g.cfg.Port)); err != nil {
+	router.GET("/exercises", g.getAllExerciseCards)
+	router.GET("/programs", g.getAllProgramCards)
+	router.GET("/programs/:id", g.getProgramByID)
+	router.GET("/exercises/:id", g.getExerciseByID)
+	router.GET("/exerciseFilter", g.getExerciseFilters)
+	router.GET("/programFilter", g.getProgramFilters)
+
+	addr := fmt.Sprintf(":%s", g.cfg.Port)
+	if err := router.Run(addr); err != nil {
 		return err
 	}
-
 	return nil
+}
+
+func corsConfiguration(r *gin.Engine) {
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 }

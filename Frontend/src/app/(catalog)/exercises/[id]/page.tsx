@@ -1,51 +1,47 @@
 import { Exercise } from "@/interfaces/interfaces";
-import { easy } from "@/stubs/difficultyStub";
-import { push } from "@/stubs/exerciseTypeStub";
-import { deltoids, pectoral, triceps } from "@/stubs/muscleStubs";
 import styles from "./page.module.css";
 import ExerciseBrief from "@/components/exerciseBrief/exerciseBrief";
-
-const data: Exercise = {
-  id: 0,
-  name: "Отжимание",
-  muscles: [triceps, deltoids, pectoral],
-  difficulty: easy,
-  exerciseType: push,
-  equipment: [],
-  description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, laudantium obcaecati. Impedit odio placeat dolorum ipsa sed repellendus dolor, est totam tenetur, amet molestias dolorem necessitatibus dolores culpa soluta minima?",
-  tips: [
-    "Molestias dolorem necessitatibus dolores culpa soluta minima?",
-    "Adipisicing elit. Deleniti, ipsa sed repellendus dolor, est totam tenetur, dolorem necessitatibus.",
-  ],
-  variations: [
-    "Amet molestias dolorem necessitatibus dolores culpa soluta minima?",
-    "Consectetur adipisicing elit. Deleniti, dio placeat dolorum ipsa sed repellendus dolor, est totam tenetur.",
-    "Lorem met molestias dolorem necessitatibus dolores culpa soluta minima?",
-  ],
-  pictures: [],
-};
+import Carousel from "@/components/carousel/carousel";
 
 // const isFavorite = false;
-const similar = true;
+const similar = false;
 
-export default function ExercisePage() {
+export default async function ExercisePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const apiUrl = process.env.NEXT_PRIVATE_API_URL;
+  const data: Promise<Exercise> = fetch(
+    `http://${apiUrl}/exercises/${id}`
+  ).then((res) => res.json());
+  if (data === null) return <>ERROR 404</>;
+
   return (
     <div className={styles.inner}>
-      <h1 className={styles.heading}>{data.name}</h1>
-      <div className={styles.carousel}></div>
+      <h1 className={styles.heading}>{(await data).name}</h1>
+
+      <div className={styles.carousel}>
+        <Carousel
+          images={(await data).pictures.map((p) => `/pictures/${p}`)}
+        ></Carousel>
+      </div>
 
       <div className={styles.briefContainer}>
-        <ExerciseBrief exercise={data} isFavorite={true}></ExerciseBrief>
+        <ExerciseBrief exercise={await data} isFavorite={true}></ExerciseBrief>
       </div>
 
       <div className={styles.descriptionContainer}>
         <Description
           header="Техника выполнения"
-          text={data.description}
+          text={(await data).description}
         ></Description>
-        <List header="Советы:" listItems={data.tips}></List>
-        <List header="Варианты усложнения:" listItems={data.variations}></List>
+        <List header="Советы:" listItems={(await data).tips}></List>
+        <List
+          header="Варианты усложнения:"
+          listItems={(await data).variations}
+        ></List>
       </div>
 
       {similar && (

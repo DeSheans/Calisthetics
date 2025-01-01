@@ -22,13 +22,17 @@
   padding: 0.4rem 0;
 }
 
+.heading::first-letter {
+  text-transform: capitalize;
+}
+
 .carousel {
   grid-area: carousel;
 
-  /* temp */
+  /* temp
   height: 500px;
-  /* aspect-ratio: 16 / 9; */
-  background-color: grey;
+  aspect-ratio: 16 / 9;
+  background-color: grey; */
 }
 
 .briefContainer {

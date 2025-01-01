@@ -6,16 +6,30 @@ import {
   CheckboxGroup,
   FilterGroup,
   RadioGroup,
+  StaticFilterGroup,
 } from "@/interfaces/interfaces";
-import { difficulty } from "@/stubs/difficultyStub";
-import { programTypes } from "@/stubs/programTypeStub";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const filters = FetchFilterGroups();
-const DataContext = createContext("");
+export const ProgramsContext = createContext("");
 
 export default function ProgramsCatalog() {
   const [filterParams, setFilterParams] = useState(() => "");
+  const [filters, setFilters] = useState((): FilterGroup[] => []);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    fetch(`http://${apiUrl}/programFilter`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFilters(
+          (data as StaticFilterGroup[]).map((g): FilterGroup => {
+            return g.groupType === "checkbox"
+              ? new CheckboxGroup(g.groupID, g.name, g.options, g.groupType)
+              : new RadioGroup(g.groupID, g.name, g.options, g.groupType);
+          })
+        );
+      });
+  }, []);
 
   return (
     <div className={styles.inner}>
@@ -27,18 +41,10 @@ export default function ProgramsCatalog() {
         ></Filter>
       </div>
       <div className={styles.content}>
-        <DataContext.Provider value={filterParams}>
+        <ProgramsContext.Provider value={filterParams}>
           <Programs></Programs>
-        </DataContext.Provider>
+        </ProgramsContext.Provider>
       </div>
     </div>
   );
-}
-
-function FetchFilterGroups(): FilterGroup[] {
-  return [
-    new RadioGroup("programTypes", "тип программы", programTypes),
-    // new CheckboxGroup("favorite", "", [{ id: 0, name: "избранное" }]),
-    new RadioGroup("difficulty", "сложность", difficulty),
-  ];
 }

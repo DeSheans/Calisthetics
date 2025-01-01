@@ -21,11 +21,6 @@ export default function Header() {
         <nav className={style.nav}>
           <NavItem content="Упражнения" href="/exercises" />
           <NavItem content="Программы" href="/programs" />
-          {true ? (
-            <NavItem content="Профиль" href="/profile" />
-          ) : (
-            <NavItem content="Авторизация" href="/login" />
-          )}
         </nav>
       </div>
     </header>

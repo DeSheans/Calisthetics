@@ -17,10 +17,8 @@
   gap: 0.1rem;
   padding-right: 1rem;
 
-  /* max-height: 7rem;
-  
-    overflow-y: hidden;
-    overflow-x: auto; */
+  max-height: 20rem;
+  overflow-y: auto;
 }
 
 /* .groupHider {

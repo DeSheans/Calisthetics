@@ -1,4 +1,63 @@
-/* .inner {
-  margin: 0 auto;
-  max-width: var(--page-width);
-} */
+.landing {
+  padding: 1rem 0;
+}
+
+.header {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.postHeader {
+  text-align: center;
+}
+
+.main {
+  padding: 4rem 0 2rem 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.exercises {
+  display: flex;
+  flex-direction: row;
+}
+
+.exerciseImage {
+  max-width: calc(100% - 40%);
+}
+
+.exerciseText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.programs {
+  display: flex;
+  flex-direction: row;
+}
+
+.programImage {
+  max-width: calc(100% - 40%);
+}
+
+.programText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.description {
+  padding: 2rem 0;
+}
+
+.link,
+.link:visited {
+  color: var(--main-brand-color);
+}
+
+.link:hover {
+  color: var(--main-brand-color-hover);
+}

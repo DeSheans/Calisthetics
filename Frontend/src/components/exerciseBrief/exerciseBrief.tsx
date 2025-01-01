@@ -12,28 +12,28 @@ export default function ExerciseBrief({
     <div className={styles.brief}>
       <div className={styles.briefInner}>
         <div className={styles.briefExerciseType}>
-          {`Тип упражнения: ${exercise.exerciseType.name}`}
+          {`Тип упражнения: ${exercise.exerciseType}`}
         </div>
         <div className={styles.briefEquipment}>
           <span>Требуемое оборудование: </span>
           {exercise.equipment.length === 0 ? (
-            "Нет"
+            "нет"
           ) : (
             <ul className={styles.briefList}>
               {exercise.equipment.map((e) => (
-                <li>{e.name}</li>
+                <li>{e}</li>
               ))}
             </ul>
           )}
         </div>
         <div className={styles.briefDifficulty}>
-          {`Сложность: ${exercise.difficulty.name}`}
+          {`Сложность: ${exercise.difficulty}`}
         </div>
         <div className={styles.briefMuscles}>
           <span>Целевые группы мышц: </span>
           <ul className={styles.briefList}>
             {exercise.muscles.map((m) => (
-              <li>{m.name}</li>
+              <li>{m}</li>
             ))}
           </ul>
         </div>

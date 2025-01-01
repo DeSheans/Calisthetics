@@ -7,5 +7,6 @@ type ExerciseCard struct {
 	MusclesID      []int    `bson:"musclesID"`
 	DifficultyID   int      `bson:"difficultyID"`
 	ExerciseTypeID int      `bson:"exerciseTypeID"`
+	EquipmentID    []int    `bson:"equipmentID"`
 	Pictures       []string `bson:"pictures"`
 }

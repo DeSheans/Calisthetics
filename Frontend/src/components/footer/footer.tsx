@@ -9,7 +9,7 @@ const footerContent = [
       { name: "Главная", link: "/", target: "_self" },
       { name: "Упражнения", link: "/exercises", target: "_self" },
       { name: "Программы", link: "/programs", target: "_self" },
-      { name: "Профиль", link: "/profile", target: "_self" },
+      // { name: "Профиль", link: "/profile", target: "_self" },
     ],
   },
   {

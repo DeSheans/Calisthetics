@@ -25,7 +25,7 @@ export default function FilterOption({
     <label className={styles.option}>
       <input
         className={styles.optionInput}
-        type={group.returnType()}
+        type={group.groupType}
         name={group.groupID}
         id={option.id.toString()}
         onChange={() =>

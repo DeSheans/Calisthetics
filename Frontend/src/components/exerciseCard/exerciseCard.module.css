@@ -51,6 +51,10 @@
   overflow: hidden;
 }
 
+.name::first-letter {
+  text-transform: capitalize;
+}
+
 .class {
   color: var(--dark-accent);
 }

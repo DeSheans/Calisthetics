@@ -13,7 +13,7 @@ export default function Card({ Program }: { Program: ProgramCard }) {
           </Link>
         </div>
         <div className={styles.class}>
-          <span className={styles.type}>Тип: {Program.type}. </span>
+          <span className={styles.type}>Тип: {Program.programType}. </span>
           <span className={styles.trainingNumber}>
             Количество тренировок: {Program.trainings.length}.{" "}
           </span>
@@ -23,14 +23,11 @@ export default function Card({ Program }: { Program: ProgramCard }) {
         </div>
         <ul className={styles.trainings}>
           {Program.trainings.map((t) => (
-            <li>
+            <li key={t.id}>
               <Training key={t.id} training={t}></Training>
             </li>
           ))}
         </ul>
-        {/* <div className={styles.favorite}>
-          <Favorite></Favorite>
-        </div> */}
       </div>
     </div>
   );
@@ -41,7 +38,7 @@ function Training({ training }: { training: Training }) {
     <div className={styles.training}>
       <span>{training.name}</span>
       <span> | </span>
-      <span>{training.exercises.map((e) => e.exercise.name).join("; ")}</span>
+      <span>{training.exercises.map((e) => e.exercise).join("; ")}</span>
     </div>
   );
 }

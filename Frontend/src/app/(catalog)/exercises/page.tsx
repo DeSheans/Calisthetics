@@ -2,22 +2,34 @@
 import Exercises from "@/components/exercises/exercises";
 import Filter from "@/components/filter/filter";
 import styles from "./page.module.css";
-import { muscles } from "@/stubs/muscleStubs";
-import { equipment } from "@/stubs/equipmentStub";
-import { exerciseTypes } from "@/stubs/exerciseTypeStub";
-import { difficulty } from "@/stubs/difficultyStub";
 import {
   CheckboxGroup,
   FilterGroup,
   RadioGroup,
+  StaticFilterGroup,
 } from "@/interfaces/interfaces";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const filters = FetchFilterGroups();
-const DataContext = createContext("");
+export const ExercisesContext = createContext("");
 
 export default function ExerciseCatalog() {
   const [filterParams, setFilterParams] = useState(() => "");
+  const [filters, setFilters] = useState((): FilterGroup[] => []);
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    fetch(`http://${apiUrl}/exerciseFilter`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFilters(
+          (data as StaticFilterGroup[]).map((g): FilterGroup => {
+            return g.groupType === "checkbox"
+              ? new CheckboxGroup(g.groupID, g.name, g.options, g.groupType)
+              : new RadioGroup(g.groupID, g.name, g.options, g.groupType);
+          })
+        );
+      });
+  }, []);
 
   return (
     <div className={styles.inner}>
@@ -28,29 +40,11 @@ export default function ExerciseCatalog() {
           setFilterParams={setFilterParams}
         ></Filter>
       </aside>
-      <p>{filterParams}</p>
       <div className={styles.content}>
-        <DataContext.Provider value={filterParams}>
+        <ExercisesContext.Provider value={filterParams}>
           <Exercises></Exercises>
-        </DataContext.Provider>
+        </ExercisesContext.Provider>
       </div>
     </div>
   );
-}
-
-function FetchFilterGroups(): FilterGroup[] {
-  // fetch filters : {
-  // filterGroupID = string
-  // filterGroupName = string
-  // filterOptions = {id:number, name:string}
-  // }
-  //
-
-  return [
-    new CheckboxGroup("muscles", "группы мышц", muscles),
-    new CheckboxGroup("equipment", "оборудование", equipment),
-    // new CheckboxGroup(2, "", [{ optionID:0, name: "избранное" }]),
-    new RadioGroup("exerciseType", "тип упражнения", exerciseTypes),
-    new RadioGroup("difficulty", "сложность", difficulty),
-  ];
 }

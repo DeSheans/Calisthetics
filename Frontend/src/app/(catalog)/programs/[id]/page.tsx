@@ -1,26 +1,34 @@
 import { Program, Training as TrainingType } from "@/interfaces/interfaces";
 import styles from "./page.module.css";
-import { twoDaySplit } from "@/stubs/programStub";
 
-const data: Program = twoDaySplit;
+export default async function ProgramPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const apiUrl = process.env.NEXT_PRIVATE_API_URL;
+  const data: Promise<Program> = fetch(`http://${apiUrl}/programs/${id}`).then(
+    (res) => res.json()
+  );
+  if (data === null) return <>ERROR 404</>;
 
-export default function ProgramPage() {
   return (
     <div className={styles.inner}>
-      <h1 className={styles.heading}>{data.name}</h1>
-      <p className={styles.description}>{data.description}</p>
+      <h1 className={styles.heading}>{(await data).name}</h1>
+      <p className={styles.description}>{(await data).description}</p>
 
       <div className={styles.brief}>
         <div className={styles.briefInner}>
-          <span>{`Тип программы: ${data.type}`}</span>
-          <span>{`Сложность: ${data.difficulty}`}</span>
+          <span>{`Тип программы: ${(await data).programType}`}</span>
+          <span>{`Сложность: ${(await data).difficulty}`}</span>
           {/* <button>В избранное</button> */}
         </div>
       </div>
 
       <div className={styles.trainingsContainer}>
-        {data.trainings.map((t) => (
-          <Training training={t}></Training>
+        {(await data).trainings.map((t) => (
+          <Training key={t.id} training={t}></Training>
         ))}
       </div>
     </div>
@@ -41,8 +49,8 @@ function Training({ training }: { training: TrainingType }) {
       </thead>
       <tbody>
         {training.exercises.map((e) => (
-          <tr className={styles.trainingRow}>
-            <td className={styles.trainingData}>{e.exercise.name}</td>
+          <tr key={e.exercise} className={styles.trainingRow}>
+            <td className={styles.trainingData}>{e.exercise}</td>
             <td className={styles.trainingData}>{e.sets}</td>
             <td className={styles.trainingData}>{e.reps}</td>
             <td className={styles.trainingData}>{e.rest}</td>

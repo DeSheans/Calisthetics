@@ -12,13 +12,13 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         <div className={styles.container}>
-          <div className={styles.header}>
+          <header className={styles.header}>
             <Header />
-          </div>
+          </header>
           <main className={styles.main}>{children}</main>
-          <div className={styles.footer}>
+          <footer className={styles.footer}>
             <Footer />
-          </div>
+          </footer>
         </div>
       </body>
     </html>

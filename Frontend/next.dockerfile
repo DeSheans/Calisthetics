@@ -24,5 +24,4 @@ COPY --from=builder /calisthetic/tsconfig.json ./tsconfig.json
 COPY --from=builder /calisthetic/.next ./.next
 COPY --from=builder /calisthetic/node_modules ./node_modules
 
-# EXPOSE 3001
 CMD ["pnpm", "dev"]
